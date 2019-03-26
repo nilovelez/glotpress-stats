@@ -94,11 +94,10 @@ function render_top( $input ) {
 				$clean = false;
 				$top   = $i + 1;
 			}
-
 			echo '<tr>'. "\n";
 			echo '<th>' . ( $i + 1)	 . '</th>';
 			echo '<th>' . $row['title'] . '</td>';
-			echo '<td>' . $row['installs'] . '</td>';
+			echo '<td>' . number_format ( $row['installs'], 0, '', '.' ) . '</td>';
 			echo '<td><a href="' . $base_url . $row['untranslated_link'] . '">' . $row['untranslated'] . '</a></td>';
 			echo '</tr>'. "\n";
 		}
@@ -135,7 +134,7 @@ function render_tasks( $input ) {
 				$top   = $i + 1;
 			}
 			if ( $printed_tasks < 3 ) {
-				echo '*' . $row['title'] . '* (' . $row['installs'] . '+ instalaciones)' . "\n";
+				echo '*' . $row['title'] . '* (' . number_format ( $row['installs'], 0, '', '.' ) . '+ instalaciones)' . "\n";
 				echo $row['untranslated'] . ' cadenas sin traducir' . "\n";
 				echo $base_url . $row['untranslated_link'] . "\n\n";
 				$printed_tasks++;
