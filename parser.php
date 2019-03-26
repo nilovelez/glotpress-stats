@@ -2,14 +2,12 @@
 
 namespace glotstats;
 
-function parse( $locale = false, $directory = false ) {
+function parse( $locale = false, $directory = false, $view ) {
 	
 
 	if ( empty( $locale ) || empty( $directory ) ) {
 		return false;
 	}
-
-	echo "hola";
 
 
 	$url = 'https://translate.wordpress.org/locale/' . $locale . '/default/stats/' . $directory;
@@ -27,7 +25,7 @@ function parse( $locale = false, $directory = false ) {
 
 		//$item = $xml->tr[0];
 
-		$base_url = 'https://translate.wordpress.org';
+		
 
 		//var_dump( $item );
 
@@ -48,6 +46,16 @@ function parse( $locale = false, $directory = false ) {
 		);
 	}
 
+	if ( 'top' === $view ) {
+		render_top( $input );
+	} elseif ( 'tasks' === $view ) {
+		render_tasks( $input );
+	}
+
+}
+
+function render_top( $input ) {
+	$base_url = 'https://translate.wordpress.org';
 	$count = count( $input );
 
 	//echo '<pre>';
@@ -101,5 +109,42 @@ function parse( $locale = false, $directory = false ) {
 
 	echo 'Top'.$top .' :100:<br>';
 	echo $untranslated .' unstranlated<br>';
+}
 
+
+function render_tasks( $input ) {
+	$base_url = 'https://translate.wordpress.org';
+	$count = count( $input );
+
+	echo '<pre>';
+
+	$clean         = true;
+	$top           = $count;
+	$untranslated  = 0;
+	$printed_tasks = 0;
+
+	for ( $i = 0; $i < $count; $i++ ) {
+		$row = $input[ $i ];
+
+		if ( 0 !== $row['untranslated'] ) {
+
+			$untranslated += $row['untranslated'];
+
+			if ( $clean ) {
+				$clean = false;
+				$top   = $i + 1;
+			}
+			if ( $printed_tasks < 3 ) {
+				echo '*' . $row['title'] . '* (' . $row['installs'] . '+ instalaciones)' . "\n";
+				echo $row['untranslated'] . ' cadenas sin traducir' . "\n";
+				echo $base_url . $row['untranslated_link'] . "\n\n";
+				$printed_tasks++;
+			}
+		}
+	}
+
+	echo '</pre>';
+
+	echo 'Top'.$top .' :100:<br>';
+	echo $untranslated .' unstranlated<br>';
 }
