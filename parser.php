@@ -80,6 +80,8 @@ function render_top( $input ) {
 	$clean        = true;
 	$top          = $count;
 	$untranslated = 0;
+	$printed_tasks = 0;
+
 
 	for ( $i = 0; $i < $count; $i++ ) {
 		$row = $input[ $i ];
@@ -100,6 +102,7 @@ function render_top( $input ) {
 			echo '<td>' . number_format ( $row['installs'], 0, '', '.' ) . '</td>';
 			echo '<td><a href="' . $base_url . $row['untranslated_link'] . '">' . $row['untranslated'] . '</a></td>';
 			echo '</tr>'. "\n";
+			$printed_tasks++;
 		}
 	}
 
