@@ -143,7 +143,6 @@ function render_tasks( $input ) {
 	}
 
 	echo '</pre>';
-
 	echo 'Top'.$top .' :100:<br>';
-	echo $untranslated .' unstranlated<br>';
+	echo $printed_tasks.' projects remaining ('.$untranslated .' strings) to cpmplete Top200 <br>';
 }

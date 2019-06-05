@@ -2,7 +2,7 @@
 /**
  * Plugin Name: GlotPress Stats
  * Description: Shortcode for displaying a polyglot-oriented digest of a locale
- * Version: 0.1
+ * Version: 0.2
  * Author: Nilo Velez
  * Author URI: https://www.nilovelez.com
  * Text Domain: glotstats
