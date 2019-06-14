@@ -104,6 +104,11 @@ function render_top( $input ) {
 			echo '</tr>'. "\n";
 			$printed_tasks++;
 		}
+
+		if ( $i > 200 ) {
+			break;
+		}
+
 	}
 
 	echo '</tbody></table><div>';
