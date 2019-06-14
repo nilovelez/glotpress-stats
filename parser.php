@@ -148,6 +148,10 @@ function render_tasks( $input ) {
 				$printed_tasks++;
 			}
 		}
+
+		if ( $i > 200 ) {
+			break;
+		}
 	}
 
 	echo '</pre>';
