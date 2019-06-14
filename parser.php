@@ -86,6 +86,11 @@ function render_top( $input ) {
 	for ( $i = 0; $i < $count; $i++ ) {
 		$row = $input[ $i ];
 
+		if ( $i > 200 ) {
+			break;
+		}
+
+
 		//print_r( $row );
 
 		if ( 0 !== $row['untranslated'] ) {
@@ -105,9 +110,6 @@ function render_top( $input ) {
 			$printed_tasks++;
 		}
 
-		if ( $i > 200 ) {
-			break;
-		}
 
 	}
 
@@ -133,6 +135,10 @@ function render_tasks( $input ) {
 	for ( $i = 0; $i < $count; $i++ ) {
 		$row = $input[ $i ];
 
+		if ( $i > 200 ) {
+			break;
+		}
+
 		if ( 0 !== $row['untranslated'] ) {
 
 			$untranslated += $row['untranslated'];
@@ -149,9 +155,7 @@ function render_tasks( $input ) {
 			}
 		}
 
-		if ( $i > 200 ) {
-			break;
-		}
+
 	}
 
 	echo '</pre>';
