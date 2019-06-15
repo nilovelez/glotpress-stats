@@ -86,9 +86,11 @@ function render_top( $input ) {
 	for ( $i = 0; $i < $count; $i++ ) {
 		$row = $input[ $i ];
 
+		/*
 		if ( $i > 200 ) {
 			break;
 		}
+		*/
 
 
 		//print_r( $row );
@@ -135,9 +137,11 @@ function render_tasks( $input ) {
 	for ( $i = 0; $i < $count; $i++ ) {
 		$row = $input[ $i ];
 
+		/*
 		if ( $i > 200 ) {
 			break;
 		}
+		*/
 
 		if ( 0 !== $row['untranslated'] ) {
 
