@@ -26,6 +26,11 @@ add_action(
 		/**
 		 * Outputs the stats table of the given locale and project
 		 * [glotstats locale="es" directory="plugins" view="tasks"]
+		 * locale: locale code as used in the >>URLs<<< os translate.wordpress.org
+		 * directory: choose themes or plugins
+		 * view:
+		 *  - top: shows the unstranslatede projects from the top 200 of the selected directory
+		 *  - stats: shows ready to copy Slack code with the info of the next 3 projects to do
 		 */
 		function shortcode_callback( $atts ) {
 			$a = shortcode_atts(
