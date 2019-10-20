@@ -48,7 +48,7 @@ add_action(
 				return false;
 			}
 			ob_start();
-			require plugin_dir_path( __FILE__ ) . './parser.php';
+			require_once plugin_dir_path( __FILE__ ) . './parser.php';
 			parse( $a['locale'], $a['directory'], $a['view'] );
 			return ob_get_clean();
 		}
