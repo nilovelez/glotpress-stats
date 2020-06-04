@@ -79,7 +79,7 @@ function render_top( $input ) {
 
 			if ( $clean ) {
 				$clean = false;
-				$top   = $i + 1;
+				$top   = $i;
 			}
 			echo '<tr>' . "\n";
 			echo '<th>' . ( $i + 1 ) . '</th>';
@@ -103,7 +103,7 @@ function render_tasks( $input ) {
 	echo '<pre>';
 
 	$clean         = true;
-	$top           = 0;
+	$top           = $count;
 	$untranslated  = 0;
 	$printed_tasks = 0;
 
