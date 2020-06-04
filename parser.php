@@ -96,7 +96,9 @@ function render_top( $input ) {
 
 	echo '</tbody></table><div>';
 	echo 'Top'. $top . ' :100:<br>';
-	echo $printed_tasks . ' projects remaining (' . $untranslated . ' strings) to complete Top200 <br>';
+	if ( $printed_tasks > 0){
+		echo $printed_tasks . ' projects remaining (' . $untranslated . ' strings) to complete Top200 <br>';
+	}
 }
 
 
@@ -134,5 +136,7 @@ function render_tasks( $input ) {
 
 	echo '</pre>';
 	echo 'Top' . $top . ' :100:<br>';
-	echo $printed_tasks . ' projects remaining (' . $untranslated . ' strings) to complete Top200 <br>';
+	if ( $printed_tasks > 0){
+		echo $printed_tasks . ' projects remaining (' . $untranslated . ' strings) to complete Top200 <br>';
+	}
 }
