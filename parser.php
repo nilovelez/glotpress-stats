@@ -85,7 +85,7 @@ function render_top( $input ) {
 			echo '<th>' . ( $i + 1 ) . '</th>';
 			echo '<th>' . $row['title'] . '</td>';
 			echo '<td>' . number_format( $row['installs'], 0, '', '.' ) . '</td>';
-			echo '<td><a href="' . $base_url . $row['untranslated_link'] . '">' . $row['untranslated'] . '</a></td>';
+			echo '<td><a href="' . $base_url . $row['untranslated_link'] . '" rel="nofollow">' . $row['untranslated'] . '</a></td>';
 			echo '</tr>' . "\n";
 			$printed_tasks++;
 		}
@@ -103,7 +103,7 @@ function render_tasks( $input ) {
 	echo '<pre>';
 
 	$clean         = true;
-	$top           = $count;
+	$top           = 0;
 	$untranslated  = 0;
 	$printed_tasks = 0;
 
@@ -116,7 +116,7 @@ function render_tasks( $input ) {
 
 			if ( $clean ) {
 				$clean = false;
-				$top   = $i + 1;
+				$top   = $i;
 			}
 			if ( $printed_tasks < 3 ) {
 				echo '*' . $row['title'] . '* (' . number_format ( $row['installs'], 0, '', '.' ) . '+ instalaciones)' . "\n";
