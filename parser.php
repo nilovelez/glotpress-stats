@@ -73,13 +73,16 @@ function render_top( $input ) {
 	for ( $i = 0; $i < $count; $i++ ) {
 		$row = $input[ $i ];
 
-		if ( 0 !== $row['untranslated'] ) {
+		if ( 0 === $row['untranslated'] ) {
+			if ( $clean ) {
+				$top   = $i+1;
+			}
+		} else {
 
 			$untranslated += $row['untranslated'];
 
 			if ( $clean ) {
 				$clean = false;
-				$top   = $i;
 			}
 			echo '<tr>' . "\n";
 			echo '<th>' . ( $i + 1 ) . '</th>';
@@ -110,13 +113,15 @@ function render_tasks( $input ) {
 	for ( $i = 0; $i < $count; $i++ ) {
 		$row = $input[ $i ];
 
-		if ( 0 !== $row['untranslated'] ) {
+		if ( 0 === $row['untranslated'] ) {
+			if ( $clean ) {
+				$top   = $i + 1;
+			}
+		} else {
 
 			$untranslated += $row['untranslated'];
-
 			if ( $clean ) {
-				$clean = false;
-				$top   = $i;
+				$clean = false;	
 			}
 			if ( $printed_tasks < 3 ) {
 				echo '*' . $row['title'] . '* (' . number_format ( $row['installs'], 0, '', '.' ) . '+ instalaciones)' . "\n";
