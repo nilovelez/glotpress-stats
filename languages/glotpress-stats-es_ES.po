@@ -1,0 +1,145 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GlotPress Stats\n"
+"POT-Creation-Date: 2021-03-02 21:00+0100\n"
+"PO-Revision-Date: 2021-03-02 21:01+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: glotpress-stats.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: glotpress-stats.php:95
+msgctxt "decimal separator"
+msgid "."
+msgstr ","
+
+#: glotpress-stats.php:96
+msgid "No data available in table"
+msgstr "No hay datos disponibles en la tabla"
+
+#: glotpress-stats.php:98
+#, php-format
+msgid "Showing _START_ to _END_ of _TOTAL_ %1$s"
+msgstr "Mostrando %1$s _START_ al _END_ de _TOTAL_"
+
+#: glotpress-stats.php:100
+#, php-format
+msgid "Showing 0 to 0 of 0 %1$s"
+msgstr "Mostrando %1$s 0 al 0 de 0"
+
+#: glotpress-stats.php:102
+#, php-format
+msgid "(filtered from _MAX_ total %1$s )"
+msgstr "(filtrados de un total de _MAX_ %1$s)"
+
+#: glotpress-stats.php:103
+msgctxt "thousands separator"
+msgid ","
+msgstr " "
+
+#: glotpress-stats.php:105
+#, php-format
+msgid "Show _MENU_ %1$s per page"
+msgstr "Mostrar _MENU_ %1$s por página"
+
+#: glotpress-stats.php:106
+msgid "Loading..."
+msgstr "Cargando..."
+
+#: glotpress-stats.php:107
+msgid "Processing..."
+msgstr "Procesando..."
+
+#: glotpress-stats.php:108
+msgid "Search "
+msgstr "Buscar "
+
+#: glotpress-stats.php:109
+msgid "No matching records found"
+msgstr "No se han encontrado registros que coincidan"
+
+#: glotpress-stats.php:111
+msgid "First"
+msgstr "Primera"
+
+#: glotpress-stats.php:112
+msgid "Last"
+msgstr "Última"
+
+#: glotpress-stats.php:113
+msgid "Next"
+msgstr "Siguiente"
+
+#: glotpress-stats.php:114
+msgid "Previous"
+msgstr "Anterior"
+
+#: glotpress-stats.php:116
+msgid ": activate to sort column ascending"
+msgstr ": activar para ordenar la columna de forma ascendente"
+
+#: glotpress-stats.php:117
+msgid ": activate to sort column descending"
+msgstr ": activar para ordenar la columna de forma descendente"
+
+#: parser.php:16
+msgid "An error occurred while fetching data from the WordPress directory"
+msgstr "Se ha producido un error al obtener datos del directorio de WordPress"
+
+#: parser.php:62
+msgid "Name"
+msgstr "Nombre"
+
+#: parser.php:63
+msgid "Installs"
+msgstr "Instalaciones"
+
+#: parser.php:64
+msgid "Untranslated"
+msgstr "Sin traducir"
+
+#: parser.php:140
+msgid "Overview"
+msgstr "Resumen"
+
+#. translators: 1. Remaining projects, 2. Remaining strings, 3. Top plugins/themes
+#: parser.php:147 parser.php:158 parser.php:170
+#, php-format
+msgid "%1$s projects remaining ( %2$s strings) to complete Top %3$s"
+msgstr "Quedan %1$s proyectos ( %2$s cadenas) para completar el Top %3$s"
+
+#. translators: Top plugins/themes
+#: parser.php:180
+#, php-format
+msgid "All projects in Top %1$s have been translated!"
+msgstr "¡Todos los proyectos del Top %1$s están traducidos!"
+
+#. Plugin Name of the plugin/theme
+msgid "GlotPress Stats"
+msgstr "GlotPress Stats"
+
+#. Description of the plugin/theme
+msgid "Shortcode for displaying a polyglot-oriented digest of a locale"
+msgstr "Shortcode para mostrar un resumen para polyglots de un loca"
+
+#. Author of the plugin/theme
+msgid "Nilo Velez"
+msgstr "Nilo Velez"
+
+#. Author URI of the plugin/theme
+msgid "https://www.nilovelez.com"
+msgstr "https://www.nilovelez.com"
