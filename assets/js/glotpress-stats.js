@@ -1,7 +1,5 @@
-jQuery.noConflict();
-
-jQuery(document).ready(function () {
-  jQuery('#stats-table').DataTable( {
+$(document).ready(function () {
+  $('#stats-table').DataTable( {
   	pageLength: 50,
   	searching: false,
   	lengthMenu: [ [25, 50, 100, -1], [25, 50, 100, "All"] ],
