@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GlotPress Stats\n"
-"POT-Creation-Date: 2021-03-02 21:00+0100\n"
-"PO-Revision-Date: 2021-03-02 21:01+0100\n"
+"POT-Creation-Date: 2022-05-07 18:28+0200\n"
+"PO-Revision-Date: 2022-05-07 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: glotpress-stats.php\n"
@@ -22,77 +22,85 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: glotpress-stats.php:95
+#: glotpress-stats.php:84
+msgid "themes"
+msgstr "temas"
+
+#: glotpress-stats.php:85
+msgid "plugins"
+msgstr "plugins"
+
+#: glotpress-stats.php:99
 msgctxt "decimal separator"
 msgid "."
 msgstr ","
 
-#: glotpress-stats.php:96
+#: glotpress-stats.php:100
 msgid "No data available in table"
 msgstr "No hay datos disponibles en la tabla"
 
-#: glotpress-stats.php:98
+#: glotpress-stats.php:102
 #, php-format
 msgid "Showing _START_ to _END_ of _TOTAL_ %1$s"
 msgstr "Mostrando %1$s _START_ al _END_ de _TOTAL_"
 
-#: glotpress-stats.php:100
+#: glotpress-stats.php:104
 #, php-format
 msgid "Showing 0 to 0 of 0 %1$s"
 msgstr "Mostrando %1$s 0 al 0 de 0"
 
-#: glotpress-stats.php:102
+#: glotpress-stats.php:106
 #, php-format
 msgid "(filtered from _MAX_ total %1$s )"
 msgstr "(filtrados de un total de _MAX_ %1$s)"
 
-#: glotpress-stats.php:103
+#: glotpress-stats.php:107
 msgctxt "thousands separator"
 msgid ","
 msgstr " "
 
-#: glotpress-stats.php:105
+#: glotpress-stats.php:109
 #, php-format
 msgid "Show _MENU_ %1$s per page"
 msgstr "Mostrar _MENU_ %1$s por página"
 
-#: glotpress-stats.php:106
+#: glotpress-stats.php:110
 msgid "Loading..."
 msgstr "Cargando..."
 
-#: glotpress-stats.php:107
+#: glotpress-stats.php:111
 msgid "Processing..."
 msgstr "Procesando..."
 
-#: glotpress-stats.php:108
+#: glotpress-stats.php:112
 msgid "Search "
 msgstr "Buscar "
 
-#: glotpress-stats.php:109
+#: glotpress-stats.php:113
 msgid "No matching records found"
 msgstr "No se han encontrado registros que coincidan"
 
-#: glotpress-stats.php:111
+#: glotpress-stats.php:115
 msgid "First"
 msgstr "Primera"
 
-#: glotpress-stats.php:112
+#: glotpress-stats.php:116
 msgid "Last"
 msgstr "Última"
 
-#: glotpress-stats.php:113
+#: glotpress-stats.php:117
 msgid "Next"
 msgstr "Siguiente"
 
-#: glotpress-stats.php:114
+#: glotpress-stats.php:118
 msgid "Previous"
 msgstr "Anterior"
 
-#: glotpress-stats.php:116
+#: glotpress-stats.php:120
 msgid ": activate to sort column ascending"
 msgstr ": activar para ordenar la columna de forma ascendente"
 
-#: glotpress-stats.php:117
+#: glotpress-stats.php:121
 msgid ": activate to sort column descending"
 msgstr ": activar para ordenar la columna de forma descendente"
 
