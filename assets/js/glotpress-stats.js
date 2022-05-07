@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(document).ready(function( $ ) {
   $('#stats-table').DataTable( {
   	pageLength: 50,
   	searching: false,
