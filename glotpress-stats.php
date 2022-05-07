@@ -2,7 +2,7 @@
 /**
  * Plugin Name: GlotPress Stats
  * Description: Shortcode for displaying a polyglot-oriented digest of a locale
- * Version: 0.5
+ * Version: 0.6
  * Author: Nilo Velez
  * Author URI: https://www.nilovelez.com
  * Text Domain: glotpress-stats
@@ -37,7 +37,7 @@ add_action(
 
 		// Register Styles and Scripts.
 		wp_register_style(
-			'datatable',
+			'datatables',
 			plugin_dir_url( __FILE__ ) . 'vendor/DataTables/datatables.min.css',
 			'',
 			'1.10.23'
@@ -53,7 +53,7 @@ add_action(
 			'glotpress-stats',
 			plugin_dir_url( __FILE__ ) . 'assets/js/glotpress-stats.js',
 			array( 'datatables', 'jquery' ),
-			'0.3',
+			'0.6',
 			true
 		);
 
@@ -64,7 +64,7 @@ add_action(
 		 * directory: choose themes or plugins
 		 * view:
 		 *  - top: shows the unstranslatede projects from the top 200 of the selected directory
-		 *  - stats: shows ready to copy Slack code with the info of the next 3 projects to do
+		 *  - tasks: shows ready to copy Slack code with the info of the next 3 projects to do
 
 		$atts array params passed to the function.
 		 */
@@ -80,12 +80,16 @@ add_action(
 			if ( ! in_array( $a['directory'], array( 'themes', 'plugins' ), true ) ) {
 				return false;
 			}
+			$trans = array(
+				'themes'  => __( 'themes', 'glotpress-stats' ),
+				'plugins' => __( 'plugins', 'glotpress-stats' ),
+			);
 			if ( ! in_array( $a['view'], array( 'top', 'tasks' ), true ) ) {
 				return false;
 			}
 			if ( 'top' === $a['view'] ) {
 				// Enqueue Styles and Scripts.
-				wp_enqueue_style( 'datatable' );
+				wp_enqueue_style( 'datatables' );
 				wp_enqueue_script( 'datatables' );
 				wp_enqueue_script( 'glotpress-stats' );
 				wp_add_inline_script(
@@ -95,14 +99,14 @@ add_action(
 							'decimal'             => _x( '.', 'decimal separator', 'glotpress-stats' ),
 							'emptyTable'          => __( 'No data available in table', 'glotpress-stats' ),
 							// Translators: %1$s "themes" or "plugins".
-							'info'                => sprintf( __( 'Showing _START_ to _END_ of _TOTAL_ %1$s', 'glotpress-stats' ), $a['directory'] ),
+							'info'                => sprintf( __( 'Showing _START_ to _END_ of _TOTAL_ %1$s', 'glotpress-stats' ), $trans[ $a['directory'] ] ),
 							// Translators: %1$s "themes" or "plugins".
-							'infoEmpty'           => sprintf( __( 'Showing 0 to 0 of 0 %1$s', 'glotpress-stats' ), $a['directory'] ),
+							'infoEmpty'           => sprintf( __( 'Showing 0 to 0 of 0 %1$s', 'glotpress-stats' ), $trans[ $a['directory'] ] ),
 							// Translators: %1$s "themes" or "plugins".
-							'infoFiltered'        => sprintf( __( '(filtered from _MAX_ total %1$s )', 'glotpress-stats' ), $a['directory'] ),
+							'infoFiltered'        => sprintf( __( '(filtered from _MAX_ total %1$s )', 'glotpress-stats' ), $trans[ $a['directory'] ] ),
 							'thousands'           => _x( ',', 'thousands separator', 'glotpress-stats' ),
 							// Translators: %1$s "themes" or "plugins".
-							'lengthMenu'          => sprintf( __( 'Show _MENU_ %1$s per page', 'glotpress-stats' ), $a['directory'] ),
+							'lengthMenu'          => sprintf( __( 'Show _MENU_ %1$s per page', 'glotpress-stats' ), $trans[ $a['directory'] ] ),
 							'loadingRecords'      => __( 'Loading...', 'glotpress-stats' ),
 							'processing'          => __( 'Processing...', 'glotpress-stats' ),
 							'search'              => __( 'Search ', 'glotpress-stats' ),
