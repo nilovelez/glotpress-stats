@@ -2,7 +2,7 @@
 /**
  * Plugin Name: GlotPress Stats
  * Description: Shortcode for displaying a polyglot-oriented digest of a locale
- * Version: 0.6
+ * Version: 0.7
  * Author: Nilo Velez
  * Author URI: https://www.nilovelez.com
  * Text Domain: glotpress-stats
@@ -40,20 +40,26 @@ add_action(
 			'datatables',
 			plugin_dir_url( __FILE__ ) . 'vendor/DataTables/datatables.min.css',
 			'',
-			'1.10.23'
+			'2.0.8'
 		);
 		wp_register_script(
 			'datatables',
 			plugin_dir_url( __FILE__ ) . 'vendor/DataTables/datatables.min.js',
 			array( 'jquery' ),
-			'1.10.23',
+			'2.0.8',
 			true
+		);
+		wp_register_style(
+			'glotpress-stats',
+			plugin_dir_url( __FILE__ ) . 'assets/css/glotpress-stats.css',
+			'',
+			'0.7'
 		);
 		wp_register_script(
 			'glotpress-stats',
 			plugin_dir_url( __FILE__ ) . 'assets/js/glotpress-stats.js',
 			array( 'datatables', 'jquery' ),
-			'0.6',
+			'0.7',
 			true
 		);
 
@@ -101,6 +107,7 @@ add_action(
 				// Enqueue Styles and Scripts.
 				wp_enqueue_style( 'datatables' );
 				wp_enqueue_script( 'datatables' );
+				wp_enqueue_style( 'glotpress-stats' );
 				wp_enqueue_script( 'glotpress-stats' );
 				wp_add_inline_script(
 					'glotpress-stats',
