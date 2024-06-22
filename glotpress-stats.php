@@ -74,6 +74,7 @@ add_action(
 					'locale'    => 'es',
 					'directory' => 'plugins',
 					'view'      => 'top',
+					'exclude'   => '',
 				),
 				$atts
 			);
@@ -87,6 +88,15 @@ add_action(
 			if ( ! in_array( $a['view'], array( 'top', 'tasks' ), true ) ) {
 				return false;
 			}
+
+			if ( ! empty( $a['exclude'] ) ) {
+				$a['exclude'] = str_replace(' ', '', $a['exclude']);
+				$a['exclude'] = explode(',', $a['exclude'] );
+			} else {
+				$a['exclude'] = array();
+			}
+
+
 			if ( 'top' === $a['view'] ) {
 				// Enqueue Styles and Scripts.
 				wp_enqueue_style( 'datatables' );
@@ -131,7 +141,8 @@ add_action(
 			parse(
 				$a['locale'],
 				$a['directory'],
-				$a['view']
+				$a['view'],
+				$a['exclude']				
 			);
 			?>
 

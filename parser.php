@@ -2,7 +2,7 @@
 
 namespace glotstats;
 
-function parse( $locale = false, $directory = false, $view = 'top' ) {
+function parse( $locale = false, $directory = false, $view = 'top', $exclude = array() ) {
 
 	if ( empty( $locale ) || empty( $directory ) ) {
 		return false;
@@ -35,6 +35,7 @@ function parse( $locale = false, $directory = false, $view = 'top' ) {
 			'title'                     => (string) $item->th->a,
 			'installs'                  => (int) $item->th['data-sort-value'],
 			'link'                      => (string) $item->th->a['href'],
+			'slug'						=> (string) preg_replace('/^.*\/([^\/]+)\/?$/', '$1', $item->th->a['href']),
 			'percent'                   => (int) $item->td[0]['data-sort-value'],
 			'language_link'             => (string) $item->td[0]->a['href'],
 			'translated'                => (int) $item->td[1]['data-sort-value'],
@@ -47,6 +48,7 @@ function parse( $locale = false, $directory = false, $view = 'top' ) {
 			'waiting'                   => (int) $item->td[4]['data-sort-value'],
 			//'waiting_link'            => (string) $item->td[4]->a['href'],
 		);
+
 	}
 
 	$base_url = 'https://translate.wordpress.org';
@@ -91,6 +93,10 @@ function parse( $locale = false, $directory = false, $view = 'top' ) {
 	for ( $i = 0; $i < $count; $i++ ) {
 		$row = $input[ $i ];
 
+		if ( in_array( $row['slug'], $exclude ) ) {
+			continue;
+		}
+
 		if ( 0 === $row['untranslated'] ) {
 			if ( $clean ) {
 				$finished_top = $i + 1;
@@ -113,8 +119,9 @@ function parse( $locale = false, $directory = false, $view = 'top' ) {
 			if ( $clean ) {
 				$clean = false;
 			}
+
 			if ( 'top' === $view ) {
-				echo '<tr>' . "\n";
+				echo '<tr data-slug="' . $row['slug'] .'">' . "\n";
 				echo '<th>' . esc_html( $i + 1 ) . '</th>';
 				echo '<th><a href="' . esc_url( $base_url . $row['language_link'] ) . '">' . esc_html( $row['title'] ) . '</a></td>';
 				echo '<td>' . number_format( $row['installs'], 0, '', '.' ) . '</td>';
