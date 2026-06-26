@@ -1,3 +1,43 @@
 #stats-table th:nth-child(2) {
 	text-align: left;
 }
+
+.glotpress-stats-copyable {
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-bottom: 1.5em;
+	padding: 1em 1.25em;
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.glotpress-stats-copyable:hover,
+.glotpress-stats-copyable:focus {
+	background: #f6f7f7;
+	border-color: #8c8f94;
+	outline: none;
+}
+
+.glotpress-stats-copy-hint {
+	color: #646970;
+	font-size: 0.875em;
+	margin: 0 0 1em;
+}
+
+.glotpress-stats-copy-hint--copied {
+	color: #007017;
+	font-weight: 600;
+}
+
+.glotpress-stats-copy-content h2 {
+	font-size: 1.25em;
+	margin: 0 0 0.75em;
+}
+
+.glotpress-stats-copy-content p {
+	margin: 0 0 1em;
+}
+
+.glotpress-stats-copy-content p:last-child {
+	margin-bottom: 0;
+}

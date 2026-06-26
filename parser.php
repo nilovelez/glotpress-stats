@@ -68,10 +68,9 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 			</thead>
 			<tbody>
 		<?php
-	} elseif ( 'tasks' === $view ) {
-		echo '<pre>';
 	}
 
+	$tasks_blocks  = array();
 	$clean         = true;
 	$remaining     = array(
 		'top100' => array(
@@ -127,67 +126,132 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 				echo '<td>' . number_format( $row['installs'], 0, '', '.' ) . '</td>';
 				echo '<td><a href="' . esc_url( $base_url . $untranslated_link ) . '" rel="nofollow">' . esc_html( $row['untranslated'] ) . '</a></td>';
 				echo '</tr>' . "\n";
-			} elseif ( 'tasks' === $view ) {
-				if ( $printed_tasks < 3 ) {
-					echo esc_html( '*' . $row['title'] . '* (' . number_format( $row['installs'], 0, '', '.' ) . '+ instalaciones)' ) . "\n";
-					echo esc_html( $row['untranslated'] . ' cadenas sin traducir' ) . "\n";
-					echo esc_html( $base_url . $untranslated_link ) . "\n\n";
-				}
+			} elseif ( 'tasks' === $view && $printed_tasks < 3 ) {
+				$tasks_blocks[] = array(
+					'title'        => $row['title'],
+					'installs'     => number_format( $row['installs'], 0, '', '.' ),
+					'untranslated' => $row['untranslated'],
+					'url'          => $base_url . $untranslated_link,
+				);
 			}
 			$printed_tasks++;
 		}
 	}
 	if ( 'top' === $view ) {
 		echo '</tbody></table></div>';
-	} elseif ( 'tasks' === $view ) {
-		echo '</pre>';
+	} elseif ( 'tasks' === $view && ! empty( $tasks_blocks ) ) {
+		$clipboard_blocks = array();
+
+		foreach ( $tasks_blocks as $task ) {
+			$installs_line = sprintf(
+				'(%s+ %s)',
+				$task['installs'],
+				__( 'installs', 'glotpress-stats' )
+			);
+			$strings_line    = sprintf(
+				/* translators: %d: number of untranslated strings */
+				__( '%d untranslated strings', 'glotpress-stats' ),
+				$task['untranslated']
+			);
+
+			$clipboard_blocks[] = sprintf(
+				'<p><strong>%1$s</strong> %2$s<br>%3$s<br><a href="%4$s">%5$s</a></p>',
+				esc_html( $task['title'] ),
+				esc_html( $installs_line ),
+				esc_html( $strings_line ),
+				esc_url( $task['url'] ),
+				esc_html( $task['url'] )
+			);
+		}
+
+		$clipboard_html = implode( "\n", $clipboard_blocks );
+		$allowed_html     = array(
+			'p'      => array(),
+			'strong' => array(),
+			'br'     => array(),
+			'a'      => array(
+				'href' => array(),
+			),
+		);
+		render_copyable_block( $clipboard_html, $allowed_html );
 	}
 
-	echo '<div id="glotpress-stats-overview">';
-	echo '<h2>' . esc_html( __( 'Overview', 'glotpress-stats' ) ) . '</h2>';
-	echo '<p>Top' . esc_html( $finished_top ) . ' 💯<br>';
+	$overview_parts   = array();
+	$overview_parts[] = 'Top' . $finished_top . ' 💯';
 
-	if ( $remaining['top100'] > 0 ) {
-		echo esc_html(
-			sprintf(
-				/* translators: 1. Remaining projects, 2. Remaining strings, 3. Top plugins/themes */
-				__( '%1$s projects remaining ( %2$s strings) to complete Top %3$s', 'glotpress-stats' ),
-				$remaining['top100']['projects'],
-				$remaining['top100']['strings'],
-				100
-			)
-		) . '<br>';
+	if ( $remaining['top100']['projects'] > 0 ) {
+		$overview_parts[] = sprintf(
+			/* translators: 1. Remaining projects, 2. Remaining strings, 3. Top plugins/themes */
+			__( '%1$s projects remaining ( %2$s strings) to complete Top %3$s', 'glotpress-stats' ),
+			$remaining['top100']['projects'],
+			$remaining['top100']['strings'],
+			100
+		);
 	}
-	if ( $remaining['top200'] > 0 ) {
-		echo esc_html(
-			sprintf(
-				/* translators: 1. Remaining projects, 2. Remaining strings, 3. Top plugins/themes */
-				__( '%1$s projects remaining ( %2$s strings) to complete Top %3$s', 'glotpress-stats' ),
-				$remaining['top200']['projects'],
-				$remaining['top200']['strings'],
-				200
-			)
-		) . '<br>';
+	if ( $remaining['top200']['projects'] > 0 ) {
+		$overview_parts[] = sprintf(
+			/* translators: 1. Remaining projects, 2. Remaining strings, 3. Top plugins/themes */
+			__( '%1$s projects remaining ( %2$s strings) to complete Top %3$s', 'glotpress-stats' ),
+			$remaining['top200']['projects'],
+			$remaining['top200']['strings'],
+			200
+		);
 	}
 
 	if ( $printed_tasks > 0 ) {
-		echo esc_html(
-			sprintf(
-				/* translators: 1. Remaining projects, 2. Remaining strings, 3. Top plugins/themes */
-				__( '%1$s projects remaining ( %2$s strings) to complete Top %3$s', 'glotpress-stats' ),
-				$remaining['total']['projects'],
-				$remaining['total']['strings'],
-				$count
-			)
+		$overview_parts[] = sprintf(
+			/* translators: 1. Remaining projects, 2. Remaining strings, 3. Top plugins/themes */
+			__( '%1$s projects remaining ( %2$s strings) to complete Top %3$s', 'glotpress-stats' ),
+			$remaining['total']['projects'],
+			$remaining['total']['strings'],
+			$count
 		);
 	} else {
-		echo esc_html(
-			sprintf(
-				/* translators: Top plugins/themes */
-				__( 'All projects in Top %1$s have been translated!', 'glotpress-stats' ),
-				$count
-			)
+		$overview_parts[] = sprintf(
+			/* translators: Top plugins/themes */
+			__( 'All projects in Top %1$s have been translated!', 'glotpress-stats' ),
+			$count
 		);
 	}
-	echo '</p></div>';
+
+	$overview_lines = array();
+
+	foreach ( $overview_parts as $overview_part ) {
+		$overview_lines[] = esc_html( $overview_part );
+	}
+
+	$overview_html = sprintf(
+		'<strong>%1$s</strong><p>%2$s</p>',
+		esc_html( sprintf( __( 'Top %1$s progress', 'glotpress-stats' ), $directory ) ),
+		implode( '<br>', $overview_lines )
+	);
+
+	$overview_allowed_html = array(
+		'strong' => array(),
+		'p'  => array(),
+		'br' => array(),
+	);
+
+	echo '<div id="glotpress-stats-overview">';
+	render_copyable_block( $overview_html, $overview_allowed_html );
+	echo '</div>';
+}
+
+/**
+ * Renders a copyable HTML block with click-to-copy behavior.
+ *
+ * @param string $content_html  HTML content to display and copy.
+ * @param array  $allowed_html  Allowed HTML tags for wp_kses.
+ */
+function render_copyable_block( $content_html, $allowed_html ) {
+	?>
+	<div
+		class="glotpress-stats-copyable"
+		role="button"
+		tabindex="0"
+	>
+		<p class="glotpress-stats-copy-hint"><?php esc_html_e( 'Click to copy', 'glotpress-stats' ); ?></p>
+		<div class="glotpress-stats-copy-content"><?php echo wp_kses( $content_html, $allowed_html ); ?></div>
+	</div>
+	<?php
 }

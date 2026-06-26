@@ -40,13 +40,13 @@ add_action(
 			'datatables',
 			plugin_dir_url( __FILE__ ) . 'vendor/DataTables/datatables.min.css',
 			'',
-			'2.0.8'
+			'2.3.7'
 		);
 		wp_register_script(
 			'datatables',
 			plugin_dir_url( __FILE__ ) . 'vendor/DataTables/datatables.min.js',
 			array( 'jquery' ),
-			'2.0.8',
+			'2.3.7',
 			true
 		);
 		wp_register_style(
@@ -58,7 +58,7 @@ add_action(
 		wp_register_script(
 			'glotpress-stats',
 			plugin_dir_url( __FILE__ ) . 'assets/js/glotpress-stats.js',
-			array( 'datatables', 'jquery' ),
+			array( 'jquery' ),
 			'0.7',
 			true
 		);
@@ -103,12 +103,22 @@ add_action(
 			}
 
 
+			wp_enqueue_style( 'glotpress-stats' );
+			wp_enqueue_script( 'glotpress-stats' );
+			wp_add_inline_script(
+				'glotpress-stats',
+				'const GLOTSTATS_COPY = ' . wp_json_encode(
+					array(
+						'clickToCopy' => __( 'Click to copy', 'glotpress-stats' ),
+						'copied'      => __( 'Copied to clipboard', 'glotpress-stats' ),
+					)
+				),
+				'before'
+			);
+
 			if ( 'top' === $a['view'] ) {
-				// Enqueue Styles and Scripts.
 				wp_enqueue_style( 'datatables' );
 				wp_enqueue_script( 'datatables' );
-				wp_enqueue_style( 'glotpress-stats' );
-				wp_enqueue_script( 'glotpress-stats' );
 				wp_add_inline_script(
 					'glotpress-stats',
 					'const GLOTSTATS_TRANSLATION = ' . wp_json_encode(
