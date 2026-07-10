@@ -9,7 +9,9 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 	}
 
 	if ( ! defined( 'GLOTSTATS_DEBUG' ) ) {
-		$url = 'https://translate.wordpress.org/locale/' . $locale . '/default/stats/' . $directory;
+		// random number to break cache
+		$rand = rand( 1000, 9999 );
+		$url = 'https://translate.wordpress.org/locale/' . $locale . '/default/stats/' . $directory . '/?rand=' . $rand ;
 
 		$file = wp_remote_get( $url );
 		if ( is_wp_error( $file ) ) {
