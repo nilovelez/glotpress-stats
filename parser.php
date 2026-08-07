@@ -125,7 +125,7 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 				echo '<tr data-slug="' . $row['slug'] .'">' . "\n";
 				echo '<th>' . esc_html( $i + 1 ) . '</th>';
 				echo '<th><a href="' . esc_url( $base_url . $row['language_link'] ) . '">' . esc_html( $row['title'] ) . '</a></td>';
-				echo '<td>' . number_format( $row['installs'], 0, '', '.' ) . '</td>';
+				echo '<td>' . number_format( $row['installs'], 0, '', '.' ) . '+</td>';
 				echo '<td><a href="' . esc_url( $base_url . $untranslated_link ) . '" rel="nofollow">' . esc_html( $row['untranslated'] ) . '</a></td>';
 				echo '</tr>' . "\n";
 			} elseif ( 'tasks' === $view && $printed_tasks < 3 ) {
