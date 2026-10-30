@@ -6,6 +6,8 @@ Version 0.8 of the plugin is published (GitHub release `0.8`): the `[glotstats]`
 
 Newest entries first. One per work session, brief.
 
+- 2026-10-30: backlog cleared; the remaining items were dropped.
+
 - 2026-10-30: version 0.8 approved, merged to `master` and published as a GitHub release.
 
 - 2026-10-30: version 0.8 on `development`: fetch errors shown, Top 100/200 counts fixed, two shortcodes on one page fixed, `data-slug` escaped, DataTables version corrected, WPCS clean. Tested on Playground.
