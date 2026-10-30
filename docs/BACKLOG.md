@@ -1,15 +1,16 @@
 # Backlog
 
-Known issues and improvements, not scheduled yet. The plugin works and these are not a priority: it is a small working tool for translate.wordpress.org volunteers, used by very few people. Pick items from here only when Nilo schedules them.
+Known issues and improvements, not scheduled yet. The plugin works: it is a small working tool for translate.wordpress.org volunteers, used by very few people. Pick items from here only when Nilo schedules them.
 
-## Performance
+The backlog is empty.
 
-- **No caching.** Every page view fetches the stats page from translate.wordpress.org, and the `?rand=` parameter bypasses any cache on purpose. This is a deliberate choice for now: fresh data matters more than server performance, since the plugin only reads and parses one HTML page. If caching is ever added, keep it short (a transient of a few minutes) so the data stays fresh.
+## Decided against
 
-## Features
+Don't propose these again unless Nilo brings them up:
 
-- **Exclusions are manual.** Projects that use their own translation platform are filtered out only through the shortcode's `exclude` attribute; there is no automatic detection.
-- **Demo data exists only for `es`.** In `local` and `development` environments the plugin reads `demo_data/top_<directory>_es.html` whatever the locale.
+- **Caching.** Every page view fetches the stats page from translate.wordpress.org on purpose: fresh data matters more than server load.
+- **Automatic exclusions.** Projects that use their own translation platform are filtered out only through the shortcode's `exclude` attribute.
+- **Demo data for other locales.** In `local` and `development` environments the plugin reads the `es` demo data whatever the locale.
 
 ## Done
 
