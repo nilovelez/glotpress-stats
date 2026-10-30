@@ -13,7 +13,7 @@ Where the project stands, to continue in a new session. Update it at the end of 
 | # | Milestone | Status |
 |---|---|---|
 | 0 | Development environment: Composer (WPCS, DataTables), PHPCS, blueprint, `.gitattributes`, README, agent docs. | Done, approved |
-| 1 | Research the data source for the moderator view: what translate.wordpress.org offers (public API, locale pages, logged-in pages), what needs a moderator's login, and a proposed approach. Output: `docs/research-data-source.md`. No plugin code. | In progress: public sources done |
+| 1 | Research the data source for the moderator view: what translate.wordpress.org offers (public API, locale pages, logged-in pages), what needs a moderator's login, and a proposed approach. Output: `docs/research-data-source.md`. No plugin code. | In progress: research done, approach pending Nilo's decision |
 
 ## Decisions
 
@@ -24,4 +24,4 @@ Where the project stands, to continue in a new session. Update it at the end of 
 
 ## Next step
 
-Milestone 1 continues. The public sources are documented in `docs/research-data-source.md`: all the data is public, but a full locale needs about 700 requests. Next: compare with the logged-in Waiting tab (Nilo will provide an HTML dump), then propose an approach.
+Milestone 1 continues. `docs/research-data-source.md` documents the public sources, the search for a bulk API (none exists: the logged-in Waiting tab has the same project-level granularity as the public listing) and a proposed approach: a two-level view with the listing page and subprojects fetched on demand, plus a short cache. Next: Nilo decides on the approach.

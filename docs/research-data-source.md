@@ -48,8 +48,47 @@ For `es`: 29 listing pages plus about 680 project pages, at about 1 second each,
 - **Incremental refresh.** Use the listing totals (cheap: 29 requests) to detect which projects changed since the last crawl and only re-fetch those project pages.
 - **Two levels in the view.** Show the project-level list from the listing (one row per project, with its Waiting/Fuzzy total), and fetch a project's subproject breakdown on demand, through the server, when the moderator expands it.
 
+Crawling hundreds of pages is ruled out: WordPress.org rate-limits requests and may answer with a CAPTCHA at any time, and it is not a civilized use of their servers.
+
+## Looking for a bulk source
+
+Searched the source code of translate.wordpress.org (the Meta repository, mirrored at [WordPress/wordpress.org](https://github.com/WordPress/wordpress.org), plugins `wporg-gp-routes` and `wporg-gp-customizations`), GlotPress core, its REST API and the web.
+
+### The logged-in Waiting tab
+
+`Routes\Locale::get_paged_active_sub_projects()` in `wporg-gp-routes/inc/routes/class-locale.php` builds both the public listing and the Waiting tab. The Waiting tab is the same query as the public `strings-waiting-and-fuzzy` listing, over the same table (`project_translation_status`, one row of counts per project and locale, with a `has_pending` flag), with two differences:
+
+- It only lists the projects the user can approve: all of them for a GTE or locale manager, only theirs for a PTE.
+- It accepts `without-editors=1` to hide projects that have a PTE assigned.
+
+It has the **same granularity**: one row per project, never per subproject. So it gives nothing the public listing doesn't, and an HTML dump of it is no longer needed.
+
+The per-subproject breakdown is only built in `get_locale_project()` (the project page in a locale), one project at a time.
+
+### Other places checked
+
+- **WordPress REST API** (`/wp-json/`): the only translation namespace is `translate/v1`, with a single `jobs` route for internal cron jobs. The Abilities API (`wp-abilities/v1`) needs authentication, and the Meta source only registers abilities for the plugin directory, none for translations.
+- **GlotPress API routes**: translate.wordpress.org removes `/api/languages` and `/api/languages/<locale>`. `/api/languages/<locale>/default` still answers, but took 31 seconds to return an empty list (and a 500 with a trailing slash). Not usable, and not to be called again.
+- **The web**: no documented endpoint. The Polyglots handbook only describes the web interface. Existing tools work project by project: [Kabook PTE Project Monitor](https://wordpress.org/plugins/kabook-pte-project-monitor/) calls `/api/projects/wp-plugins/<slug>/<subproject>/` for each plugin of an author, from WP-Cron.
+
+## Conclusion
+
+There is no public endpoint, documented or not, that returns per-subproject counts for a whole locale. The server computes it, but only exposes it as the project-level listing (24 per page) and the per-project page.
+
+## Proposed approach
+
+A civilized two-level view, close to what a moderator does by hand but without the clicks:
+
+1. **Project list from the listing.** Fetch only the listing page being viewed (`?filter=strings-waiting-and-fuzzy&page=<n>`, and the sort the moderator picks): 1 request per 24 projects. Each row is a project with its Waiting/Fuzzy total.
+2. **Subprojects on demand.** When the moderator expands a project, the server fetches that project's page (`/locale/<locale>/default/<type>/<slug>/`) and returns its subprojects with the direct filtered links: 1 request per expanded project, triggered by a person.
+3. **Short-lived cache** (a few minutes) for both, so repeated views and several moderators don't repeat requests. The translator views keep fetching fresh data.
+
+That is about the same number of requests the moderator's own browser makes today, so it stays well within reasonable use.
+
+For automation (second priority), the same two requests apply, plus the public API for the strings themselves (`/api/projects/.../<locale>/default/?filters[status]=waiting`) and the PO export.
+
+**Last resort: a feature request to the Meta team** for an API route with the locale listing and its per-subproject counts. `get_paged_active_sub_projects()` already has the query; it would only need a JSON route with the subproject breakdown.
+
 ## Still to check
 
-- The logged-in **Waiting** tab: what it lists that the public listing doesn't (for a PTE, probably only the projects they can moderate), and whether it has a cheaper way to get the breakdown. Nilo will provide an HTML dump.
-- Whether the listing's Waiting/Fuzzy total includes changes-requested strings.
-- Rate limits on translate.wordpress.org for a crawl of about 700 requests.
+- Whether the listing's Waiting/Fuzzy total includes changes-requested strings (`has_pending` is computed elsewhere).
