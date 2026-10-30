@@ -32,5 +32,5 @@ That page cannot be parsed like the stats page: it is paginated, and it is only 
 
 ## Open questions
 
-- **Data source.** Where to get, for a locale, the list of subprojects with strings pending review and their counts, and whether it needs a moderator's login. This is milestone 1 (research); its results will go in `docs/research-data-source.md`.
+- **Data source.** Where to get, for a locale, the list of subprojects with strings pending review and their counts, and whether it needs a moderator's login. This is milestone 1 (research); see `docs/research-data-source.md`.
 - **Prioritization criteria**, beyond sorting by count.
