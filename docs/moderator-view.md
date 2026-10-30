@@ -1,6 +1,6 @@
 # Moderator view
 
-**Decision (2026-10-30): the moderator view will not be built in this plugin.** It moves to a separate project: a browser extension for translate.wordpress.org, preferably as a contribution to an existing extension (fork and pull request) rather than a new one. This plugin keeps its translator views. This document keeps the definition and the reasoning, as input for that project.
+**Decision (2026-10-30): the moderator view will not be built in this plugin.** It moves to a separate project: Nilo's own Chrome extension for translate.wordpress.org, and later, optionally, a contribution of the same features to GlotDict (fork and pull request). This plugin keeps its translator views. The brief for the new project is `docs/extension-handoff.md`; this document keeps the definition and the reasoning.
 
 ## Background: how translate.wordpress.org is organized
 

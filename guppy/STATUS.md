@@ -1,10 +1,12 @@
 # Status
 
-Version 0.8 of the plugin is published (GitHub release `0.8`): the `[glotstats]` shortcode shows translators which popular plugins and themes of a locale still have untranslated strings. No milestone is scheduled and the backlog is empty. The view for translation editors moved to a separate project, a browser extension.
+Version 0.8 of the plugin is published (GitHub release `0.8`): the `[glotstats]` shortcode shows translators which popular plugins and themes of a locale still have untranslated strings. The plugin is for translators only and is in maintenance: no milestone is scheduled and the backlog is empty. The view for translation editors moves to a separate project, a Chrome extension, whose brief is `docs/extension-handoff.md`; contributing it to GlotDict is an optional later step.
 
 ## Log
 
 Newest entries first. One per work session, brief.
+
+- 2026-10-30: plugin set to maintenance, translators only; brief for the moderator Chrome extension written in `docs/extension-handoff.md`.
 
 - 2026-10-30: backlog cleared; the remaining items were dropped.
 
