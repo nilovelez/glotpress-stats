@@ -28,7 +28,7 @@
 		},
 		{
 			"step": "runPHP",
-			"code": "<?php require_once '/wordpress/wp-load.php'; $pages = array( 'glotstats-top' => array( 'GlotPress Stats: top', '[glotstats locale=\"es\" directory=\"plugins\" view=\"top\"]' ), 'glotstats-tasks' => array( 'GlotPress Stats: tasks', '[glotstats locale=\"es\" directory=\"plugins\" view=\"tasks\"]' ) ); foreach ( $pages as $slug => $page ) { $found = get_posts( array( 'name' => $slug, 'post_type' => 'page', 'post_status' => 'any', 'numberposts' => 1 ) ); if ( empty( $found ) ) { wp_insert_post( array( 'post_name' => $slug, 'post_title' => $page[0], 'post_content' => $page[1], 'post_type' => 'page', 'post_status' => 'publish' ) ); } }"
+			"code": "<?php require_once '/wordpress/wp-load.php'; $pages = array( 'glotstats-top' => array( 'GlotPress Stats: top', '[glotstats locale=\"es\" directory=\"plugins\" view=\"top\"]' ), 'glotstats-tasks' => array( 'GlotPress Stats: tasks', '[glotstats locale=\"es\" directory=\"plugins\" view=\"tasks\"]' ), 'glotstats-two-tables' => array( 'GlotPress Stats: two tables', '[glotstats locale=\"es\" directory=\"plugins\" view=\"top\"] [glotstats locale=\"es\" directory=\"themes\" view=\"top\"]' ), 'glotstats-error' => array( 'GlotPress Stats: fetch error', '[glotstats locale=\"no-such-locale\" directory=\"plugins\" view=\"top\"]' ) ); foreach ( $pages as $slug => $page ) { $found = get_posts( array( 'name' => $slug, 'post_type' => 'page', 'post_status' => 'any', 'numberposts' => 1 ) ); if ( empty( $found ) ) { wp_insert_post( array( 'post_name' => $slug, 'post_title' => $page[0], 'post_content' => $page[1], 'post_type' => 'page', 'post_status' => 'publish' ) ); } }"
 		},
 		{
 			"step": "activatePlugin",

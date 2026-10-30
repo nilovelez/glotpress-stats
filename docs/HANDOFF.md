@@ -4,7 +4,7 @@ Where the project stands, to continue in a new session. Update it at the end of 
 
 ## Current state
 
-- `master` holds version 0.7 of the plugin, in production, plus the development tooling and docs. `development` is the working branch.
+- `master` holds version 0.7 of the plugin, in production, plus the development tooling and docs. `development` has version 0.8 (milestone 2), not published yet.
 - The translator views (`[glotstats]`, `top` and `tasks`) work and are the scope of this plugin.
 - The moderator view was researched and moved to a separate project, a browser extension (see `docs/moderator-view.md`). It will not be built here.
 
@@ -14,6 +14,7 @@ Where the project stands, to continue in a new session. Update it at the end of 
 |---|---|---|
 | 0 | Development environment: Composer (WPCS, DataTables), PHPCS, blueprint, `.gitattributes`, README, agent docs. | Done, approved |
 | 1 | Research the data source for the moderator view. Output: `docs/research-data-source.md`. | Done: no bulk source exists; the moderator view moves to a browser extension project |
+| 2 | Backlog fixes, version 0.8: fetch errors shown, Top 100/200 off-by-one, two shortcodes on one page, `data-slug` escaping, DataTables version, WPCS clean. Tested on Playground. | Done on `development`, pending Nilo's review |
 
 ## Decisions
 
@@ -26,4 +27,6 @@ Where the project stands, to continue in a new session. Update it at the end of 
 
 ## Next step
 
-Nilo decides what comes next for the plugin; the candidates are in `docs/BACKLOG.md`. The browser extension is a separate project with its own repo.
+Nilo reviews milestone 2 on the test site and decides whether to publish 0.8 to `master`. Version 0.8 must bump the asset versions (done): the JavaScript changed, and browsers with the 0.7 script cached would not initialize the table. The remaining backlog items are features, not fixes. The browser extension is a separate project with its own repo.
+
+Test pages in `blueprint.json`: `/glotstats-top/`, `/glotstats-tasks/`, `/glotstats-two-tables/` (plugins and themes tables on one page) and `/glotstats-error/` (an invalid locale, to see the error message).
