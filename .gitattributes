@@ -9,7 +9,8 @@
 
 # Development files, excluded from `git archive` (the release zip).
 # Add here any other file or folder that is not part of the plugin.
-# Note: /assets is NOT excluded: it holds the plugin's runtime CSS and JS.
+# /assets is reserved for the WordPress.org directory images; the plugin's
+# runtime CSS and JS live in /resources.
 /.gitattributes  export-ignore
 /.gitignore      export-ignore
 /.github         export-ignore
@@ -20,6 +21,7 @@
 /composer.json   export-ignore
 /composer.lock   export-ignore
 /phpcs.xml.dist  export-ignore
+/assets          export-ignore
 /assets-src      export-ignore
 /demo_data       export-ignore
 /guppy           export-ignore
