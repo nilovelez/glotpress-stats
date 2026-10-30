@@ -3,9 +3,9 @@
   "title": "GlotPress Stats",
   "description": "Helper plugin for WordPress moderators",
   "status": "active",
-  "status_text": "Version 0.7 is in production. Version 0.8, with bug fixes for the translator views, is ready for review; the moderator view moved to a separate browser extension project.",
-  "last_update": "2026-10-30 10:21:01 +0100",
-  "last_update_unix": 1793352061,
+  "status_text": "Version 0.8 is published on GitHub with bug fixes for the translator views. The moderator view moved to a separate browser extension project based on GlotDict.",
+  "last_update": "2026-10-30 10:55:01 +0100",
+  "last_update_unix": 1793354101,
   "url": "https://github.com/nilovelez/glotpress-stats",
   "status_url": "https://raw.githubusercontent.com/nilovelez/glotpress-stats/master/guppy/STATUS.md",
   "icon": null

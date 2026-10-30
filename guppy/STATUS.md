@@ -1,10 +1,12 @@
 # Status
 
-Version 0.7 of the plugin is in production: the `[glotstats]` shortcode shows translators which popular plugins and themes of a locale still have untranslated strings. Version 0.8, with the backlog fixes, is ready on the `development` branch and waiting for Nilo's review before it is published. The view for translation editors moved to a separate project, a browser extension.
+Version 0.8 of the plugin is published (GitHub release `0.8`): the `[glotstats]` shortcode shows translators which popular plugins and themes of a locale still have untranslated strings. No milestone is scheduled; the remaining backlog items are new features. The view for translation editors moved to a separate project, a browser extension.
 
 ## Log
 
 Newest entries first. One per work session, brief.
+
+- 2026-10-30: version 0.8 approved, merged to `master` and published as a GitHub release.
 
 - 2026-10-30: version 0.8 on `development`: fetch errors shown, Top 100/200 counts fixed, two shortcodes on one page fixed, `data-slug` escaped, DataTables version corrected, WPCS clean. Tested on Playground.
 
