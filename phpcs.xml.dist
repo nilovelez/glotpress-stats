@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<ruleset name="GlotPress Stats">
+	<description>WordPress Coding Standards for GlotPress Stats.</description>
+
+	<file>.</file>
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>/resources/vendor/*</exclude-pattern>
+	<exclude-pattern>/assets-src/*</exclude-pattern>
+	<exclude-pattern>/languages/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<rule ref="WordPress"/>
+
+	<config name="minimum_wp_version" value="6.5"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="glotpress-stats"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="glotstats"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

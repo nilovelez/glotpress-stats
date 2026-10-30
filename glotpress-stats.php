@@ -38,26 +38,26 @@ add_action(
 		// Register Styles and Scripts.
 		wp_register_style(
 			'datatables',
-			plugin_dir_url( __FILE__ ) . 'vendor/DataTables/datatables.min.css',
+			plugin_dir_url( __FILE__ ) . 'resources/vendor/datatables/datatables.min.css',
 			'',
 			'2.3.7'
 		);
 		wp_register_script(
 			'datatables',
-			plugin_dir_url( __FILE__ ) . 'vendor/DataTables/datatables.min.js',
+			plugin_dir_url( __FILE__ ) . 'resources/vendor/datatables/datatables.min.js',
 			array( 'jquery' ),
 			'2.3.7',
 			true
 		);
 		wp_register_style(
 			'glotpress-stats',
-			plugin_dir_url( __FILE__ ) . 'assets/css/glotpress-stats.css',
+			plugin_dir_url( __FILE__ ) . 'resources/css/glotpress-stats.css',
 			'',
 			'0.7'
 		);
 		wp_register_script(
 			'glotpress-stats',
-			plugin_dir_url( __FILE__ ) . 'assets/js/glotpress-stats.js',
+			plugin_dir_url( __FILE__ ) . 'resources/js/glotpress-stats.js',
 			array( 'jquery' ),
 			'0.7',
 			true

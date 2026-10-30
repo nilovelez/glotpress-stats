@@ -1,0 +1,27 @@
+# Normalize line endings to LF in the repository and the working tree.
+* text=auto eol=lf
+
+# Binary files.
+*.png binary
+*.jpg binary
+*.gif binary
+*.mo  binary
+
+# Development files, excluded from `git archive` (the release zip).
+# Add here any other file or folder that is not part of the plugin.
+# /assets is reserved for the WordPress.org directory images; the plugin's
+# runtime CSS and JS live in /resources.
+/.gitattributes  export-ignore
+/.gitignore      export-ignore
+/.github         export-ignore
+/.claude         export-ignore
+/CLAUDE.md       export-ignore
+/README.md       export-ignore
+/blueprint.json  export-ignore
+/composer.json   export-ignore
+/composer.lock   export-ignore
+/phpcs.xml.dist  export-ignore
+/assets          export-ignore
+/assets-src      export-ignore
+/demo_data       export-ignore
+/guppy           export-ignore
