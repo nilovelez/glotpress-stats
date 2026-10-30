@@ -1,0 +1,17 @@
+{
+	"name": "nilovelez/glotpress-stats",
+	"description": "Development tools for GlotPress Stats. Not part of the plugin package.",
+	"license": "GPL-2.0-or-later",
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^3.0"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"scripts": {
+		"lint": "phpcs",
+		"fix": "phpcbf"
+	}
+}
