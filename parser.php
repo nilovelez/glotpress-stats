@@ -1,21 +1,39 @@
 <?php
+/**
+ * Fetches and parses the translate.wordpress.org stats page of a locale and renders the views.
+ *
+ * @package GlotPress_Stats
+ */
 
 namespace glotstats;
 
-function parse( $locale = false, $directory = false, $view = 'top', $exclude = array() ) {
+/**
+ * Parses the stats of a locale and outputs the requested view.
+ *
+ * @param string $locale         Locale slug, as used in translate.wordpress.org URLs.
+ * @param string $directory      Directory to read the stats from: 'plugins' or 'themes'.
+ * @param string $view           View to output: 'top' or 'tasks'.
+ * @param array  $exclude        Slugs of the projects to leave out.
+ * @param array  $table_language DataTables language strings for the 'top' view.
+ * @return string|false|null An error message when the stats can't be read, false on invalid arguments, null on success.
+ */
+function parse( $locale = false, $directory = false, $view = 'top', $exclude = array(), $table_language = array() ) {
+	static $instance = 0;
 
 	if ( empty( $locale ) || empty( $directory ) ) {
 		return false;
 	}
 
+	$error_message = __( 'An error occurred while fetching data from the WordPress directory', 'glotpress-stats' );
+
 	if ( ! defined( 'GLOTSTATS_DEBUG' ) ) {
-		// random number to break cache
-		$rand = rand( 1000, 9999 );
-		$url = 'https://translate.wordpress.org/locale/' . $locale . '/default/stats/' . $directory . '/?rand=' . $rand ;
+		// Random number to break the cache.
+		$rand = wp_rand( 1000, 9999 );
+		$url  = 'https://translate.wordpress.org/locale/' . $locale . '/default/stats/' . $directory . '/?rand=' . $rand;
 
 		$file = wp_remote_get( $url );
-		if ( is_wp_error( $file ) ) {
-			return __( 'An error occurred while fetching data from the WordPress directory', 'glotpress-stats' );
+		if ( is_wp_error( $file ) || 200 !== wp_remote_retrieve_response_code( $file ) ) {
+			return $error_message;
 		}
 		$file = wp_remote_retrieve_body( $file );
 	} else {
@@ -27,8 +45,18 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 	$start = strpos( $file, '<tbody' );
 	$end   = strpos( $file, '</tbody>' );
 
-	$file  = substr( $file, $start, ( $end - $start ) + 8 );
-	$xml   = new \SimpleXMLElement( $file );
+	if ( false === $start || false === $end ) {
+		return $error_message;
+	}
+
+	$file = substr( $file, $start, ( $end - $start ) + 8 );
+
+	try {
+		$xml = new \SimpleXMLElement( $file );
+	} catch ( \Exception $e ) {
+		return $error_message;
+	}
+
 	$input = array();
 
 	foreach ( $xml as $item ) {
@@ -37,21 +65,22 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 			'title'                     => (string) $item->th->a,
 			'installs'                  => (int) $item->th['data-sort-value'],
 			'link'                      => (string) $item->th->a['href'],
-			'slug'						=> (string) preg_replace('/^.*\/([^\/]+)\/?$/', '$1', $item->th->a['href']),
+			'slug'                      => (string) preg_replace( '/^.*\/([^\/]+)\/?$/', '$1', $item->th->a['href'] ),
 			'percent'                   => (int) $item->td[0]['data-sort-value'],
 			'language_link'             => (string) $item->td[0]->a['href'],
 			'translated'                => (int) $item->td[1]['data-sort-value'],
-			//'translated_link'         => (string) $item->td[1]->a['href'],
 			'untranslated'              => (int) $item->td[2]['data-sort-value'],
 			'untranslated_link_themes'  => (string) $item->td[2]->a['href'],
 			'untranslated_link_plugins' => (string) $item->th->a['href'] . 'stable/' . $locale . '/default/?filters[status]=untranslated',
 			'fuzzy'                     => (int) $item->td[3]['data-sort-value'],
-			//'fuzzy_link'              => (string) $item->td[3]->a['href'],
 			'waiting'                   => (int) $item->td[4]['data-sort-value'],
-			//'waiting_link'            => (string) $item->td[4]->a['href'],
 		);
 
 	}
+
+	// The first instance on a page keeps the original ids, so existing custom CSS still applies.
+	++$instance;
+	$id_suffix = ( 1 === $instance ) ? '' : '-' . $instance;
 
 	$base_url = 'https://translate.wordpress.org';
 	$count    = count( $input );
@@ -59,7 +88,7 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 	if ( 'top' === $view ) {
 		?>
 		<div class="stats-table">
-			<table id="stats-table">
+			<table id="stats-table<?php echo esc_attr( $id_suffix ); ?>" class="glotpress-stats-table" data-language="<?php echo esc_attr( wp_json_encode( $table_language ) ); ?>">
 				<thead>
 					<tr>
 						<th style="width: 60px;">#</th>
@@ -88,13 +117,13 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 			'strings'  => 0,
 		),
 	);
-	$finished_top = 0;
+	$finished_top  = 0;
 	$printed_tasks = 0;
 
 	for ( $i = 0; $i < $count; $i++ ) {
 		$row = $input[ $i ];
 
-		if ( in_array( $row['slug'], $exclude ) ) {
+		if ( in_array( $row['slug'], $exclude, true ) ) {
 			continue;
 		}
 
@@ -104,15 +133,16 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 			}
 		} else {
 
-			if ( $i <= 100 ) {
-				$remaining['top100']['projects']++;
+			// $i is zero-based: the top 100 are positions 0 to 99.
+			if ( $i < 100 ) {
+				++$remaining['top100']['projects'];
 				$remaining['top100']['strings'] += $row['untranslated'];
 			}
-			if ( $i <= 200 ) {
-				$remaining['top200']['projects']++;
+			if ( $i < 200 ) {
+				++$remaining['top200']['projects'];
 				$remaining['top200']['strings'] += $row['untranslated'];
 			}
-			$remaining['total']['projects']++;
+			++$remaining['total']['projects'];
 			$remaining['total']['strings'] += $row['untranslated'];
 
 			$untranslated_link = $row[ 'untranslated_link_' . $directory ];
@@ -122,10 +152,10 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 			}
 
 			if ( 'top' === $view ) {
-				echo '<tr data-slug="' . $row['slug'] .'">' . "\n";
+				echo '<tr data-slug="' . esc_attr( $row['slug'] ) . '">' . "\n";
 				echo '<th>' . esc_html( $i + 1 ) . '</th>';
 				echo '<th><a href="' . esc_url( $base_url . $row['language_link'] ) . '">' . esc_html( $row['title'] ) . '</a></td>';
-				echo '<td>' . number_format( $row['installs'], 0, '', '.' ) . '+</td>';
+				echo '<td>' . esc_html( number_format( $row['installs'], 0, '', '.' ) ) . '+</td>';
 				echo '<td><a href="' . esc_url( $base_url . $untranslated_link ) . '" rel="nofollow">' . esc_html( $row['untranslated'] ) . '</a></td>';
 				echo '</tr>' . "\n";
 			} elseif ( 'tasks' === $view && $printed_tasks < 3 ) {
@@ -136,7 +166,7 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 					'url'          => $base_url . $untranslated_link,
 				);
 			}
-			$printed_tasks++;
+			++$printed_tasks;
 		}
 	}
 	if ( 'top' === $view ) {
@@ -150,7 +180,7 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 				$task['installs'],
 				__( 'installs', 'glotpress-stats' )
 			);
-			$strings_line    = sprintf(
+			$strings_line  = sprintf(
 				/* translators: %d: number of untranslated strings */
 				__( '%d untranslated strings', 'glotpress-stats' ),
 				$task['untranslated']
@@ -167,7 +197,7 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 		}
 
 		$clipboard_html = implode( "\n", $clipboard_blocks );
-		$allowed_html     = array(
+		$allowed_html   = array(
 			'p'      => array(),
 			'strong' => array(),
 			'br'     => array(),
@@ -222,21 +252,29 @@ function parse( $locale = false, $directory = false, $view = 'top', $exclude = a
 		$overview_lines[] = esc_html( $overview_part );
 	}
 
+	$overview_title = sprintf(
+		/* translators: %1$s: the directory, plugins or themes */
+		__( 'Top %1$s progress', 'glotpress-stats' ),
+		$directory
+	);
+
 	$overview_html = sprintf(
 		'<strong>%1$s</strong><p>%2$s</p>',
-		esc_html( sprintf( __( 'Top %1$s progress', 'glotpress-stats' ), $directory ) ),
+		esc_html( $overview_title ),
 		implode( '<br>', $overview_lines )
 	);
 
 	$overview_allowed_html = array(
 		'strong' => array(),
-		'p'  => array(),
-		'br' => array(),
+		'p'      => array(),
+		'br'     => array(),
 	);
 
-	echo '<div id="glotpress-stats-overview">';
+	echo '<div id="glotpress-stats-overview' . esc_attr( $id_suffix ) . '" class="glotpress-stats-overview">';
 	render_copyable_block( $overview_html, $overview_allowed_html );
 	echo '</div>';
+
+	return null;
 }
 
 /**

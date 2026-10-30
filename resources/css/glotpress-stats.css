@@ -1,4 +1,4 @@
-#stats-table th:nth-child(2) {
+.glotpress-stats-table th:nth-child(2) {
 	text-align: left;
 }
 
