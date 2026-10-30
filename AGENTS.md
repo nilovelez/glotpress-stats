@@ -7,7 +7,7 @@ Instructions for any agent working on this repo. Read this file, then `docs/HAND
 A WordPress plugin with tools for the translate.wordpress.org (GlotPress) community of a locale:
 
 - **Translator views (existing, in production).** The `[glotstats]` shortcode parses the public stats page of a locale (`https://translate.wordpress.org/locale/<locale>/default/stats/<plugins|themes>/`) and lists the most installed projects that still have untranslated strings, so volunteers know where their work has the most impact. See `README.md`.
-- **Moderator view (in definition).** A view for translation editors (GTE and PTE) that lists the *subprojects* with strings waiting for review, with direct links, and later feeds automation. See `docs/moderator-view.md`.
+- **Moderator view: not in this plugin.** A view for translation editors (GTE and PTE) was researched here and moved to a separate project, a browser extension. See `docs/moderator-view.md` and `docs/research-data-source.md`.
 
 The plugin is in use on a live site. Keep the translator views working as they are unless Nilo asks otherwise.
 

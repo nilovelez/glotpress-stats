@@ -1,5 +1,7 @@
 # Research: data source for the moderator view
 
+> **Outcome (2026-10-30):** the moderator view moves to a separate project, a browser extension that works on the moderator's own Waiting tab. See `docs/moderator-view.md`. The plugin-side approach proposed below was not chosen.
+
 Milestone 1. Where to get, for a locale, the subprojects with strings pending review, their counts and direct links. Findings from probing translate.wordpress.org on 2026-10-30, without logging in, using the `es` locale.
 
 ## Summary
@@ -89,6 +91,4 @@ For automation (second priority), the same two requests apply, plus the public A
 
 **Last resort: a feature request to the Meta team** for an API route with the locale listing and its per-subproject counts. `get_paged_active_sub_projects()` already has the query; it would only need a JSON route with the subproject breakdown.
 
-## Still to check
-
-- Whether the listing's Waiting/Fuzzy total includes changes-requested strings (`has_pending` is computed elsewhere).
+Changes-requested strings are out of scope: moderators review waiting and fuzzy strings only.
