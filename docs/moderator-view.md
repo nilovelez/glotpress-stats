@@ -46,7 +46,7 @@ An extension (or, to prototype, a userscript) that runs on the moderator's own W
 
 Pagination is deliberate: the extension only works on the page being viewed, never on the whole list (600+ projects for `es`).
 
-Candidates to fork and contribute to: [GlotDict](https://github.com/Mte90/GlotDict) and [wpgp-tools](https://github.com/vlad-timotei/wpgp-tools). Choosing one is the first step of the new project.
+Candidates to fork and contribute to: [GlotDict](https://github.com/Mte90/GlotDict) and [wpgp-tools](https://github.com/vlad-timotei/wpgp-tools). GlotDict is the likely choice: it is the extension most moderators use. Confirming it is the first step of the new project.
 
 ## Open questions for the new project
 
