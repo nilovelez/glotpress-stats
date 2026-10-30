@@ -1,0 +1,12 @@
+{
+  "id": "nilovelez-glotpress-stats",
+  "title": "GlotPress Stats",
+  "description": "Helper plugin for WordPress moderators",
+  "status": "inactive",
+  "status_text": "Version 0.7 works and provides a shortcode with a locale's translation digest. It is not published in the WordPress.org plugin directory and no work is in progress.",
+  "last_update": "2026-10-30 08:52:24 +0100",
+  "last_update_unix": 1793346744,
+  "url": "https://github.com/nilovelez/glotpress-stats",
+  "status_url": "https://raw.githubusercontent.com/nilovelez/glotpress-stats/master/guppy/STATUS.md",
+  "icon": null
+}
