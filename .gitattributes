@@ -24,4 +24,7 @@
 /assets          export-ignore
 /assets-src      export-ignore
 /demo_data       export-ignore
+/docs            export-ignore
+/tools           export-ignore
+/AGENTS.md       export-ignore
 /guppy           export-ignore

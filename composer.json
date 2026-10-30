@@ -1,7 +1,11 @@
 {
 	"name": "nilovelez/glotpress-stats",
-	"description": "Development tools for GlotPress Stats. Not part of the plugin package.",
+	"description": "Development tools and front-end dependencies for GlotPress Stats. Not part of the plugin package: the release zip ships the files built in resources/vendor/.",
 	"license": "GPL-2.0-or-later",
+	"require": {
+		"datatables.net/datatables.net": "2.3.8",
+		"datatables.net/datatables.net-dt": "2.3.8"
+	},
 	"require-dev": {
 		"wp-coding-standards/wpcs": "^3.0"
 	},
@@ -12,6 +16,9 @@
 	},
 	"scripts": {
 		"lint": "phpcs",
-		"fix": "phpcbf"
+		"fix": "phpcbf",
+		"build-datatables": "php tools/build-datatables.php",
+		"post-install-cmd": "@build-datatables",
+		"post-update-cmd": "@build-datatables"
 	}
 }

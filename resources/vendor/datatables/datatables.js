@@ -1,15 +1,3 @@
-/*
- * This combined file was created by the DataTables downloader builder:
- *   https://datatables.net/download
- *
- * To rebuild or modify this file with the latest versions of the included
- * software please visit:
- *   https://datatables.net/download/#dt/dt-2.3.8
- *
- * Included libraries:
- *   DataTables 2.3.8
- */
-
 /*! DataTables 2.3.8
  * © SpryMedia Ltd - datatables.net/license
  */
@@ -525,7 +513,7 @@
 		 *
 		 *  @type string
 		 */
-		builder: "dt/dt-2.3.8",
+		builder: "-source-",
 	
 		/**
 		 * Buttons. For use with the Buttons extension for DataTables. This is
@@ -14252,5 +14240,3 @@ var DataTable = $.fn.dataTable;
 
 return DataTable;
 }));
-
-

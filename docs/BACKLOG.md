@@ -16,7 +16,6 @@ Known issues and improvements, not scheduled yet. The plugin works and these are
 
 ## Behavior to review
 
-- **Only untranslated strings count.** A project with 0 untranslated strings but fuzzy or waiting strings is treated as finished.
 - **Exclusions are manual.** Projects that use their own translation platform are filtered out only through the shortcode's `exclude` attribute; there is no automatic detection.
 - **Demo data exists only for `es`.** In `local` and `development` environments the plugin reads `demo_data/top_<directory>_es.html` whatever the locale.
 
