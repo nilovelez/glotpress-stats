@@ -1,6 +1,6 @@
 # Status
 
-Version 0.8 of the plugin is published (GitHub release `0.8`): the `[glotstats]` shortcode shows translators which popular plugins and themes of a locale still have untranslated strings. No milestone is scheduled; the remaining backlog items are new features. The view for translation editors moved to a separate project, a browser extension.
+Version 0.8 of the plugin is published (GitHub release `0.8`): the `[glotstats]` shortcode shows translators which popular plugins and themes of a locale still have untranslated strings. No milestone is scheduled and the backlog is empty. The view for translation editors moved to a separate project, a browser extension.
 
 ## Log
 
