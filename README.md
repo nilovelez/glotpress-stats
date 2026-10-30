@@ -21,11 +21,14 @@ On sites whose environment type is `local` or `development`, the plugin reads th
 
 The repo holds the plugin plus its development files, which are left out of the release zip through `.gitattributes`. The plugin's CSS and JavaScript live in `resources/`; `assets/` is reserved for the WordPress.org directory images.
 
-- **Coding standards:** `composer install`, then `composer lint` (PHPCS with the WordPress Coding Standards) and `composer fix`.
+- **Dependencies:** `composer install` installs the WordPress Coding Standards and DataTables, and builds the DataTables files the plugin ships in `resources/vendor/datatables/`.
+- **Coding standards:** `composer lint` (PHPCS with the WordPress Coding Standards) and `composer fix`.
 - **Test site:** `npx @wp-playground/cli@latest server --blueprint ./blueprint.json --mount-dir . /wordpress/wp-content/plugins/glotpress-stats`, then open http://127.0.0.1:9400 (`admin` / `password`). The blueprint creates two pages with the shortcode, one per view.
 - **Release zip:** `git archive --format=zip --prefix=glotpress-stats/ -o glotpress-stats-<version>.zip HEAD`.
 
-Third-party code: [DataTables](https://datatables.net/) 2.3.7 (MIT), in `resources/vendor/datatables/`.
+Project docs for contributors and agents: `AGENTS.md` and `docs/`.
+
+Third-party code: [DataTables](https://datatables.net/) 2.3.8 (MIT), installed with Composer and built into `resources/vendor/datatables/`.
 
 ## License
 

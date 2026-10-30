@@ -8,6 +8,7 @@
 	<exclude-pattern>/resources/vendor/*</exclude-pattern>
 	<exclude-pattern>/assets-src/*</exclude-pattern>
 	<exclude-pattern>/languages/*</exclude-pattern>
+	<exclude-pattern>/tools/*</exclude-pattern>
 
 	<arg name="extensions" value="php"/>
 	<arg name="colors"/>
