@@ -38,13 +38,13 @@ add_action(
 		// Register Styles and Scripts.
 		wp_register_style(
 			'datatables',
-			plugin_dir_url( __FILE__ ) . 'vendor/DataTables/datatables.min.css',
+			plugin_dir_url( __FILE__ ) . 'assets/vendor/datatables/datatables.min.css',
 			'',
 			'2.3.7'
 		);
 		wp_register_script(
 			'datatables',
-			plugin_dir_url( __FILE__ ) . 'vendor/DataTables/datatables.min.js',
+			plugin_dir_url( __FILE__ ) . 'assets/vendor/datatables/datatables.min.js',
 			array( 'jquery' ),
 			'2.3.7',
 			true
