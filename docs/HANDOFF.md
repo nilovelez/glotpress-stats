@@ -15,7 +15,8 @@ Where the project stands, to continue in a new session. Update it at the end of 
 | 0 | Development environment: Composer (WPCS, DataTables), PHPCS, blueprint, `.gitattributes`, README, agent docs. | Done, approved |
 | 1 | Research the data source for the moderator view. Output: `docs/research-data-source.md`. | Done: no bulk source exists; the moderator view moves to a browser extension project |
 | 2 | Backlog fixes, version 0.8: fetch errors shown, Top 100/200 off-by-one, two shortcodes on one page, `data-slug` escaping, DataTables version, WPCS clean. Tested on Playground. | Done, approved and published as 0.8 |
-| 3 | GlotDict setup: `upstream` remote, feature branch `waiting-subproject-links` with a local-only Manifest V3 commit to load it in Chrome, review of GlotDict's code, docs for working with the fork. | Done, pending Nilo's review |
+| 3 | GlotDict setup: `upstream` remote, feature branch `waiting-subproject-links` with a local-only Manifest V3 commit to load it in Chrome, review of GlotDict's code, docs for working with the fork. | Done, approved |
+| 4 | Direct subproject links on the Waiting tab, in GlotDict (`js/glotdict-waiting-links.js`). | In progress |
 
 ## Decisions
 
