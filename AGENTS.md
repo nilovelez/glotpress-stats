@@ -7,7 +7,7 @@ Instructions for any agent working on this repo. Read this file, then `docs/HAND
 A WordPress plugin with tools for the translate.wordpress.org (GlotPress) community of a locale:
 
 - **Translator views (existing, in production).** The `[glotstats]` shortcode parses the public stats page of a locale (`https://translate.wordpress.org/locale/<locale>/default/stats/<plugins|themes>/`) and lists the most installed projects that still have untranslated strings, so volunteers know where their work has the most impact. See `README.md`.
-- **Moderator view: not in this plugin.** A view for translation editors (GTE and PTE) was researched here and moved to a separate project, a Chrome extension. See `docs/extension-handoff.md`, `docs/moderator-view.md` and `docs/research-data-source.md`.
+- **Moderator view: not in this plugin.** A view for translation editors (GTE and PTE) was researched here and is being built as a feature of GlotDict, on a branch of Nilo's fork (`~/repos/glotdict`). Its docs live in this repo, not in the fork: see `docs/extension-handoff.md`, `docs/moderator-view.md` and `docs/research-data-source.md`.
 
 The plugin is for translators only, is in use on a live site and is in maintenance: keep the translator views working as they are unless Nilo asks otherwise.
 

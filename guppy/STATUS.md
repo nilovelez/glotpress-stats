@@ -1,10 +1,12 @@
 # Status
 
-Version 0.8 of the plugin is published (GitHub release `0.8`): the `[glotstats]` shortcode shows translators which popular plugins and themes of a locale still have untranslated strings. The plugin is for translators only and is in maintenance: no milestone is scheduled and the backlog is empty. The view for translation editors moves to a separate project, a Chrome extension, whose brief is `docs/extension-handoff.md`; contributing it to GlotDict is an optional later step.
+Version 0.8 of the plugin is published (GitHub release `0.8`): the `[glotstats]` shortcode shows translators which popular plugins and themes of a locale still have untranslated strings. The plugin is for translators only and is in maintenance: no milestone is scheduled and the backlog is empty. The view for translation editors is being built as a GlotDict feature, on the `waiting-subproject-links` branch of Nilo's fork, for a later pull request to `Mte90/GlotDict`; its docs are in `docs/extension-handoff.md`.
 
 ## Log
 
 Newest entries first. One per work session, brief.
+
+- 2026-11-06: the moderator links become a GlotDict feature: `upstream` remote and `waiting-subproject-links` branch in Nilo's fork, GlotDict's code reviewed, docs for working with the fork in `docs/extension-handoff.md`.
 
 - 2026-10-30: plugin set to maintenance, translators only; brief for the moderator Chrome extension written in `docs/extension-handoff.md`.
 
