@@ -3,9 +3,9 @@
   "title": "GlotPress Stats",
   "description": "Helper plugin for WordPress moderators",
   "status": "active",
-  "status_text": "Plugin 0.8, for translators, is in maintenance. Next: direct subproject links on the moderators' Waiting tab, built as a GlotDict feature for a pull request.",
-  "last_update": "2026-11-06 09:07:59 +0100",
-  "last_update_unix": 1793952479,
+  "status_text": "Plugin 0.8 is in maintenance. Direct subproject links on the Waiting tab work in a GlotDict fork branch. Next: export the subproject URLs, then a pull request to GlotDict.",
+  "last_update": "2026-11-06 09:54:35 +0100",
+  "last_update_unix": 1793955275,
   "url": "https://github.com/nilovelez/glotpress-stats",
   "status_url": "https://raw.githubusercontent.com/nilovelez/glotpress-stats/master/guppy/STATUS.md",
   "icon": null
