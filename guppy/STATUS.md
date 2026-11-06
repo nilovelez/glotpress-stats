@@ -6,7 +6,7 @@ Version 0.8 of the plugin is published (GitHub release `0.8`): the `[glotstats]`
 
 Newest entries first. One per work session, brief.
 
-- 2026-11-06: direct sub-project links on the Waiting tab written in the GlotDict fork (`js/glotdict-waiting-links.js`); pending Nilo's test in Chrome.
+- 2026-11-06: direct sub-project links on the Waiting tab written in the GlotDict fork (`js/glotdict-waiting-links.js`) and tested by Nilo in Chrome; then shown as a Waiting/Fuzzy table, with the Translate Project button hidden.
 
 - 2026-11-06: the moderator links become a GlotDict feature: `upstream` remote and `waiting-subproject-links` branch in Nilo's fork, GlotDict's code reviewed, docs for working with the fork in `docs/extension-handoff.md`.
 
