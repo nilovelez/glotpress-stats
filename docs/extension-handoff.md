@@ -113,13 +113,14 @@ Confirmed from a copy Nilo saved logged in (2026-11-06):
 
 ## Implementation (milestone 4)
 
-Commits `ec3f624` and `e819a6c` on the feature branch:
+Commits `ec3f624`, `e819a6c` and `1f70b4e` on the feature branch:
 
 - `js/glotdict-waiting-links.js`: `gd_waiting_links()` runs on the Waiting tab and on listings whose `filter` starts with `strings-waiting-and-fuzzy`. For each card it fetches the `.project-name a` page, two at a time, parses `table.locale-sub-projects` with `DOMParser`, and adds a box before `.project-bottom` with a table of the sub-projects that have waiting or fuzzy strings:
   - Rows: the sub-project name, plain text and without the note in parentheses ("Stable", "Stable Readme", "Development", "Development Readme").
   - Columns Waiting and Fuzzy: the count links to the filtered strings; the cell is empty when there are none.
   - The box shows a loading message, an error message if the fetch fails, or a note when no sub-project has pending strings.
-  - It adds the `gd-waiting-links-page` class to `body`, used to hide `.project-bottom` (the "Translate Project" button) on these pages, at Nilo's request.
+  - It adds the `gd-waiting-links-page` class to `body`, used to hide `.project-bottom` (the "Translate Project" button) and `.project-description` on these pages, at Nilo's request.
+  - The table has its own zebra rows: it isn't a `.gp-table`, and its cells reset the page's table styles.
   - Elements are built with the DOM, never with `innerHTML`.
 - One line each in `js/init.js`, `manifest.json`, `js/glotdict.js` (the call goes after `gd_pagination()`) and `.eslintrc`, plus a block at the end of `css/style.css`.
 - Checked with ESLint 8 and GlotDict's `.eslintrc` (clean), and in headless Chrome against the saved Waiting tab with two saved project pages.
