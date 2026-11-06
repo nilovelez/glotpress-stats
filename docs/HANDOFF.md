@@ -15,7 +15,7 @@ Where the project stands, to continue in a new session. Update it at the end of 
 | 0 | Development environment: Composer (WPCS, DataTables), PHPCS, blueprint, `.gitattributes`, README, agent docs. | Done, approved |
 | 1 | Research the data source for the moderator view. Output: `docs/research-data-source.md`. | Done: no bulk source exists; the moderator view moves to a browser extension project |
 | 2 | Backlog fixes, version 0.8: fetch errors shown, Top 100/200 off-by-one, two shortcodes on one page, `data-slug` escaping, DataTables version, WPCS clean. Tested on Playground. | Done, approved and published as 0.8 |
-| 3 | GlotDict setup: `upstream` remote, feature branch `waiting-subproject-links`, review of GlotDict's code, docs for working with the fork. | Done, pending Nilo's review |
+| 3 | GlotDict setup: `upstream` remote, feature branch `waiting-subproject-links` with a local-only Manifest V3 commit to load it in Chrome, review of GlotDict's code, docs for working with the fork. | Done, pending Nilo's review |
 
 ## Decisions
 
@@ -29,7 +29,7 @@ Where the project stands, to continue in a new session. Update it at the end of 
 
 ## Next step
 
-No milestone scheduled, and the backlog is empty: Nilo decided not to do the remaining items (see `docs/BACKLOG.md`). Only maintenance from here on for the plugin. Next, once Nilo approves milestone 3: build the direct links in GlotDict. Before writing code, get from Nilo the HTML of the Waiting tab (logged in) and decide how he tests in Chrome, since GlotDict's manifest is V2 (see `docs/extension-handoff.md`).
+No milestone scheduled, and the backlog is empty: Nilo decided not to do the remaining items (see `docs/BACKLOG.md`). Only maintenance from here on for the plugin. Next, once Nilo approves milestone 3: build the direct links in GlotDict. Before writing code, get from Nilo the HTML of the Waiting tab (logged in) and his confirmation that the branch loads in Chrome with the local-only V3 manifest commit (see `docs/extension-handoff.md`).
 
 Releases: bump `Version` and the asset versions in `glotpress-stats.php` whenever CSS or JS change, so browsers don't keep the old files. Tags have no `v` prefix (`0.8`); the GitHub release carries the `git archive` zip.
 

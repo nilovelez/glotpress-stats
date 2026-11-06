@@ -15,7 +15,7 @@ The moderator features (direct subproject links on the Waiting tab, and exportin
 | Fork | https://github.com/nilovelez/GlotDict (`origin`) |
 | Original | https://github.com/Mte90/GlotDict (`upstream`) |
 | Clone on Bender | `~/repos/glotdict` |
-| Feature branch | `waiting-subproject-links`, created from `master` at `9a50f30` (GlotDict 2.1.6) |
+| Feature branch | `waiting-subproject-links`, created from `master` at `9a50f30` (GlotDict 2.1.6); its first commit is local only (see "Manifest V2 and Chrome") |
 
 - The fork's `master` stays identical to `upstream/master`; never commit to it.
 - All the work goes to the feature branch: commit and push as you go, so Nilo can pull it on the computers where he uses the extension. It is the only feature branch in this setup, because it will become a pull request.
@@ -32,7 +32,7 @@ git switch waiting-subproject-links
 git pull   # to get new changes, then reload the extension
 ```
 
-Keep that clone on the feature branch: the browser loads whatever is checked out. See "Manifest V2 and Chrome" for how to load it.
+Keep that clone on the feature branch: the browser loads whatever is checked out. Load the folder in Chrome with `chrome://extensions` > Developer mode > Load unpacked (see "Manifest V2 and Chrome"), and reload the extension after each pull.
 
 ## How GlotDict is built
 
@@ -46,12 +46,22 @@ Findings from reading the code at 2.1.6:
 
 ### Manifest V2 and Chrome
 
-The repo's `manifest.json` is **Manifest V2** (`"background": {"scripts": [...]}`), which is the Firefox format. Current Chrome no longer runs Manifest V2 extensions, unpacked ones included, so the repo folder can't be loaded in Chrome as it is. Options for testing in Chrome:
+Upstream's `manifest.json` is **Manifest V2** (`"background": {"scripts": [...]}`), the Firefox format; `pack-ext.py` converts it to V3 only when it builds the Chrome package. Current Chrome no longer runs Manifest V2 extensions, unpacked ones included.
 
-- Build with `python3 pack-ext.py .`, unzip the Chrome `.zip` into a separate folder and load that folder unpacked. Repeat after every pull.
-- Or test in Firefox: `about:debugging` > This Firefox > Load Temporary Add-on > the repo's `manifest.json`. It loads the repo folder directly, but it is removed when Firefox closes.
+Decision: the **first commit of the feature branch** (`5c40d55`, "Local only: Manifest V3 to load the folder in Chrome") applies the same V3 conversion to `manifest.json`, so Nilo loads the clone folder directly in Chrome (`chrome://extensions` > Developer mode > Load unpacked) and only has to reload it after a pull. That commit is for our use only:
 
-To decide with Nilo. Don't change the manifest in the feature branch: that is upstream's decision, not part of this feature.
+- Keep it as the first commit of the branch and don't put anything else in it.
+- Feature changes to the manifest (adding our script to `web_accessible_resources`) go in their own commits, in the V3 format.
+- `pack-ext.py` doesn't work on this branch (it expects the V2 manifest). It isn't needed.
+
+### Opening the pull request
+
+When Nilo asks:
+
+1. Update `master` from `upstream/master`.
+2. Create a branch for the pull request from `master` and bring the feature commits without the local-only one, for example `git rebase --onto master 5c40d55 <copy of the feature branch>`.
+3. Fix the manifest by hand: our script goes in upstream's V2 `web_accessible_resources` list, one line.
+4. Check that the diff only contains the feature, push the branch to the fork and open the pull request to `Mte90/GlotDict`.
 
 ## How the feature fits in
 
@@ -97,7 +107,7 @@ On translate.wordpress.org, themes have a single set of strings (`/projects/wp-t
 ## To confirm before writing code
 
 - **The Waiting tab's URL and markup.** It was never seen logged in. Nilo has to save its HTML so the selectors are right. The server builds it with the same query as the public listing (`get_paged_active_sub_projects()` in `wporg-gp-routes/inc/routes/class-locale.php` in the Meta repository), so the cards are probably the same.
-- **How Nilo tests in Chrome** (see "Manifest V2 and Chrome").
+- **That GlotDict loads in Chrome** from the clone folder with the local V3 manifest, before adding anything.
 
 ## Open questions
 
