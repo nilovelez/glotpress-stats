@@ -104,10 +104,20 @@ On translate.wordpress.org, themes have a single set of strings (`/projects/wp-t
 - Project cards carry the project as a CSS class, `project-wp-plugins-<slug>` (and `project-wp-themes-<slug>`), as seen on the public listing.
 - The GlotPress API also has public data that may be useful later: `/api/projects/<type>/<slug>/<subproject>/<locale>/default/?filters[status]=waiting` lists the waiting strings with author and dates (for prioritizing by age), and `.../export-translations/?format=po&filters[status]=waiting` exports them as a PO file. Don't call `/api/languages/<locale>/default`: it takes about 30 seconds and returns nothing.
 
-## To confirm before writing code
+## The Waiting tab
 
-- **The Waiting tab's URL and markup.** It was never seen logged in. Nilo has to save its HTML so the selectors are right. The server builds it with the same query as the public listing (`get_paged_active_sub_projects()` in `wporg-gp-routes/inc/routes/class-locale.php` in the Meta repository), so the cards are probably the same.
-- **That GlotDict loads in Chrome** from the clone folder with the local V3 manifest, before adding anything.
+Confirmed from a copy Nilo saved logged in (2026-11-06):
+
+- URL: `/locale/<locale>/default/waiting/`, paginated with `?page=<n>` (24 projects per page), with the same filter select as the listings and a "Limit to projects without editors" checkbox.
+- Each project is a `div.project.project-waiting.project-<type>-<slug>` inside `#projects`, the same card as the public listings. `.project-name a` links to the project page in the locale; `.project-bottom` holds the "Translate Project" button.
+
+## Implementation (milestone 4)
+
+Commit `ec3f624` on the feature branch:
+
+- `js/glotdict-waiting-links.js`: `gd_waiting_links()` runs on the Waiting tab and on listings whose `filter` starts with `strings-waiting-and-fuzzy`. For each card it fetches the `.project-name a` page, two at a time, parses `table.locale-sub-projects` with `DOMParser`, and adds a box before `.project-bottom` listing the sub-projects with waiting or fuzzy strings: the sub-project name links to it, and "Waiting: n" and "Fuzzy: n" link to the filtered strings. The box shows a loading message, an error message if the fetch fails, or a note when no sub-project has pending strings. Elements are built with the DOM, never with `innerHTML`.
+- One line each in `js/init.js`, `manifest.json`, `js/glotdict.js` (the call goes after `gd_pagination()`) and `.eslintrc`, plus a block at the end of `css/style.css`.
+- Checked with ESLint 8 and GlotDict's `.eslintrc` (clean), and in headless Chrome against the saved Waiting tab with two saved project pages.
 
 ## Open questions
 
