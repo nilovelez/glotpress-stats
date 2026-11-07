@@ -34,9 +34,9 @@ No milestone scheduled, and the backlog is empty: Nilo decided not to do the rem
 
 GlotDict: work stopped after milestone 4, by Nilo's choice. The next milestone, when he schedules it, is the button to export the sub-project URLs of the current page (see "Export the URLs" and "Open questions" in `docs/extension-handoff.md`). The pull request to `Mte90/GlotDict` comes later, only when Nilo asks.
 
-Git state of the fork at the stop: `master` = `upstream/master` = `9a50f30` (never commit to it); `waiting-subproject-links` = `1f70b4e`, pushed, with the local-only commit `5c40d55` at its base.
+Git state of the fork at the stop: `master` = `upstream/master` = `9a50f30` (never commit to it); `waiting-subproject-links` = `cfbc6a8`, pushed, with the local-only commit `5c40d55` at its base.
 
-Testing without Nilo's session: `/Volumes/Datos/scratch/glotdict/` holds the saved Waiting tab and a small test server (`test/server.py`) that serves it with the feature's script, for headless Chrome screenshots. Scratch has no backup and can be regenerated.
+Testing without Nilo's session: `/Volumes/Datos/scratch/glotdict/` holds the saved Waiting tab and locale page (as a GTE) and a small test server (`test/server.py`) that serves them with the feature's script; `test/run.sh` renders them in headless Chrome and reports where the feature ran. Scratch has no backup and can be regenerated.
 
 Releases: bump `Version` and the asset versions in `glotpress-stats.php` whenever CSS or JS change, so browsers don't keep the old files. Tags have no `v` prefix (`0.8`); the GitHub release carries the `git archive` zip.
 
