@@ -106,16 +106,17 @@ On translate.wordpress.org, themes have a single set of strings (`/projects/wp-t
 
 ## The Waiting tab
 
-Confirmed from a copy Nilo saved logged in (2026-11-06):
+Confirmed from copies Nilo saved logged in (2026-11-06 and 2026-11-07):
 
 - URL: `/locale/<locale>/default/waiting/`, paginated with `?page=<n>` (24 projects per page), with the same filter select as the listings and a "Limit to projects without editors" checkbox.
+- For translation editors (GTE and PTE), the Waiting tab is also the **default tab of the locale page**, `/locale/<locale>/` or `/locale/<locale>/default/`, paginated as `?page=<n>` on the same URL. Same cards and breadcrumb; in the tab bar, `<a href="/locale/<locale>/default/waiting/" class="current">` marks it as active on both URLs. For other users, the locale page opens another tab.
 - Each project is a `div.project.project-waiting.project-<type>-<slug>` inside `#projects`, the same card as the public listings. `.project-name a` links to the project page in the locale; `.project-bottom` holds the "Translate Project" button.
 
 ## Implementation (milestone 4)
 
-Commits `ec3f624`, `e819a6c` and `1f70b4e` on the feature branch:
+Commits `ec3f624`, `e819a6c`, `1f70b4e`, `cfbc6a8` and `b188985` on the feature branch:
 
-- `js/glotdict-waiting-links.js`: `gd_waiting_links()` runs on the Waiting tab and on listings whose `filter` starts with `strings-waiting-and-fuzzy`. For each card it fetches the `.project-name a` page, two at a time, parses `table.locale-sub-projects` with `DOMParser`, and adds a box before `.project-bottom` with a table of the sub-projects that have waiting or fuzzy strings:
+- `js/glotdict-waiting-links.js`: `gd_waiting_links()` runs only under `/locale/`, and there on the Waiting tab, detected by the active tab (`a.current` whose `href` ends in `/waiting/`, whatever the URL, locale or set), and on listings whose `filter` starts with `strings-waiting-and-fuzzy`. For each card it fetches the `.project-name a` page, two at a time, parses `table.locale-sub-projects` with `DOMParser`, and adds a box before `.project-bottom` with a table of the sub-projects that have waiting or fuzzy strings:
   - Rows: the sub-project name, plain text and without the note in parentheses ("Stable", "Stable Readme", "Development", "Development Readme").
   - Columns Waiting and Fuzzy: the count links to the filtered strings; the cell is empty when there are none.
   - The box shows a loading message, an error message if the fetch fails, or a note when no sub-project has pending strings.
